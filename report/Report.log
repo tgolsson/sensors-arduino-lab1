@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.17)  15 NOV 2015 16:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.17)  15 NOV 2015 17:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -748,6 +748,15 @@ LaTeX Info: Redefining \] on input line 2666.
 )
 (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+)
+(/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
 )) (./Report.aux)
 \openout1 = `Report.aux'.
 
@@ -954,42 +963,55 @@ File: siunitx-abbreviations.cfg 2015/01/21 v2.6e siunitx: Abbreviated units
 \openout4 = `Report.lol'.
 
 
+Overfull \hbox (4.73407pt too wide) in paragraph at lines 35--42
+[][] 
+ []
+
 
 Package caption Warning: Unused \captionsetup[lstlisting] on input line 59.
 See the caption package documentation for explanation.
 
 
-Package caption Warning: Unused \captionsetup[figure] on input line 61.
+Package caption Warning: Unused \captionsetup[figure] on input line 60.
 See the caption package documentation for explanation.
 
 
-Package caption Warning: Unused \captionsetup[table] on input line 62.
+Package caption Warning: Unused \captionsetup[table] on input line 61.
 See the caption package documentation for explanation.
 
 [1
 
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Report.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./Report.aux) ) 
 Here is how much of TeX's memory you used:
- 14573 strings out of 493089
- 284091 string characters out of 6140694
- 331206 words of memory out of 5000000
- 17919 multiletter control sequences out of 15000+600000
- 15458 words of font info for 45 fonts, out of 8000000 for 9000
+ 14632 strings out of 493089
+ 285081 string characters out of 6140694
+ 336337 words of memory out of 5000000
+ 17962 multiletter control sequences out of 15000+600000
+ 20679 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,6n,42p,10484b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/shar
-e/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf-dist/fo
-nts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/publi
-c/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm
-1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/
-share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dis
-t/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on Report.pdf (1 page, 80199 bytes).
+ 43i,10n,60p,10484b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/
+share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf-dis
+t/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pf
+b></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/cm
+-super/sfbx0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200
+.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/shar
+e/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fo
+nts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/publi
+c/cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm
+1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/
+share/texmf-dist/fonts/type1/public/cm-super/sfti0900.pfb></usr/share/texmf-dis
+t/fonts/type1/public/cm-super/sfti1095.pfb>
+Output written on Report.pdf (2 pages, 190393 bytes).
 PDF statistics:
- 33 PDF objects out of 1000 (max. 8388607)
- 23 compressed objects within 1 object stream
+ 80 PDF objects out of 1000 (max. 8388607)
+ 58 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

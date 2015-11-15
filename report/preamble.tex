@@ -7,7 +7,7 @@
 \usepackage{listings}
 \usepackage{subcaption}
 \usepackage{siunitx}\usepackage{wrapfig}
-\usepackage{varioref} \usepackage{amsmath}
+\usepackage{varioref}\usepackage{amsmath}
 
 
 \setlength{\belowcaptionskip}{-6pt}
@@ -36,7 +36,7 @@
   frame=single,                   % adds a frame around the code
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
   keywordstyle=\color{blue},       % keyword style
-  language=Octave,                 % the language of the code
+  language=C++,                 % the language of the code
   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
   numbersep=20pt,                   % how far the line-numbers are from the code
   numberstyle=\tiny\color{gray}, % the style that is used for the line-numbers
@@ -57,7 +57,6 @@
   \hspace{1pt}\fcolorbox{blue!20}{gray!20}{\footnotesize\parbox{\dimexpr\textwidth-17pt\fboxsep\fboxrule\relax}{#1#2\ttfamily#3}}\vspace{-4pt}
 }
 \captionsetup[lstlisting]{format=myformat}
-\renewcommand\lstlistlistingname{Octave code listings}
 \captionsetup[figure]{labelfont=sf,hypcap=false,format=hang,margin=0.5cm,justification=RaggedRight,calcwidth=0.7\linewidth,font=footnotesize,justification=justified}
 \captionsetup[table]{labelfont=sf,hypcap=false,format=hang,margin=1cm,justification=RaggedRight,calcwidth=0.8\linewidth,font=footnotesize,justification=justified}
 \labelformat{equation}{(#1)}
