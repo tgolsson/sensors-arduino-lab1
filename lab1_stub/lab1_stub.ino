@@ -14,10 +14,10 @@
 #endif
 
 const int ENCODER_PIN = 7;
-const double KP = 50.0,
+const double KP = 30.0,
     KI = 0,
     KD = 0.0;
-
+const double V_MAX = 280.0;
 //======================= Struct Definitions ======================
 //this struct holds the state values of a desired control point
 struct ControlStates
@@ -110,8 +110,10 @@ void setOff(const std_srvs::Empty::Request &req, std_srvs::Empty::Response &res)
 ros::NodeHandle nh;
 arduino_pkg::MotorState state;
 std_msgs::Float32 r;
+std_msgs::Float32 control;
 ros::Publisher state_publisher("/motor_state", &state);
 ros::Publisher r_publisher("/r", &r);
+ros::Publisher control_publisher("/c", &control);
 ros::ServiceServer<arduino_pkg::SetPosition::Request, arduino_pkg::SetPosition::Response> pos_server("set_pos", &setPosCallback);
 ros::ServiceServer<arduino_pkg::SetVelocity::Request, arduino_pkg::SetVelocity::Response> vel_server("set_vel", &setVelCallback);
 ros::ServiceServer<arduino_pkg::SetPID::Request, arduino_pkg::SetPID::Response> pid_server("set_pid", &setPIDCallback);
@@ -166,15 +168,31 @@ void setup() {
     digitalWrite(ENCODER_PIN,HIGH); // pull-up
     attachInterrupt(digitalPinToInterrupt(ENCODER_PIN), readEncoder, RISING);
 
-    analogWrite(motor1->PWM_,3000);
+    analogWrite(motor1->PWM_,4095);
 
+#if ROS_SUPPORT == 0
+    digitalWrite(motor1->PWM_,HIGH);
+    for (int i = 0; i < 10; i++){
+        int startP = enc1->p_;
+        long start = micros();
+        double    seconds = 0;
+        while( seconds < 10)
+        {
+            seconds = (micros()-start)/(1e6);
+            Sleep(0);
+            
+        }
+        Serial.println(enc1->p_ - startP);
+    }
+#endif
     //Setup ROS related variables
 
 #if ROS_SUPPORT
     ////// ROS initializations////
     nh.initNode();
     nh.advertise(state_publisher);
-    nh.advertise(r_publisher);
+    nh.advertise(r_publisher); 
+    nh.advertise(control_publisher); 
     nh.advertiseService(pos_server);
     nh.advertiseService(vel_server);
     nh.advertiseService(pid_server);
@@ -200,6 +218,7 @@ void actuate(float control, MotorShieldPins *mps) {
 
     digitalWrite(mps->DIR_, control < 0 ? LOW : HIGH);
     analogWrite(mps->PWM_, controlNew);
+    control = controlNew;
 }
 
 //--------------------------------------------------------------------------
@@ -216,7 +235,6 @@ void positionControl(ControlStates* c_s, EncoderStates* e_s, MotorShieldPins* m_
     double setPoint = minimumJerk(c_s->ti_, (double)t_new, c_s->T_, c_s->ri_, c_s->rf_);
 
     c_s->r_ = setPoint;
-//    double e = (c_s->r_ - e_s->p_); // USED
     double e = (c_s->r_ - e_s->p_); // USED
 
     double de = (c_s->e_ - e) / dT;
@@ -247,9 +265,8 @@ void velocityControl(ControlStates* c_s, EncoderStates* e_s, MotorShieldPins* m_
 float minimumJerk(float t0, float t, float T, float q0, float qf)
 {
     //TODO: calculate minimumJerk set point
-//    double tbyT = ((double)nh.now().toSec() - mc1->ti_) / (mc1->T_ - mc1->ti_);
     double tbyT = min((t-t0)/(T-t0),1);
-    return q0 + (qf - q0) * (10.0 * pow(tbyT,3.0) - 15.0 * pow(tbyT,4.0) + 6.0 * pow(tbyT,5.0));
+    return (q0 + (qf - q0) * (10.0 * pow(tbyT,3.0) - 15.0 * pow(tbyT,4.0) + 6.0 * pow(tbyT,5.0)));
 }
 //--------------------------------------------------------------------------
 float pid(float e, float de, PIDParameters* p)
@@ -265,8 +282,11 @@ float pid(float e, float de, PIDParameters* p)
     return ut;
     
 }
+
+#if ROS_SUPPORT
 //--------------------------------------------------------------------------
 void updateState() {
+    
     state.brake = digitalRead(motor1->BRK_);
     state.direction = digitalRead(motor1->DIR_);
     state.current = analogRead(motor1->CUR_);
@@ -274,7 +294,6 @@ void updateState() {
     state.encoder = enc1->p_;
 }
 
-#if ROS_SUPPORT
 //////////////////////ROS Services ////////////////////////////////////
 void setPosCallback(const arduino_pkg::SetPosition::Request &req, arduino_pkg::SetPosition::Response &res) {
     mc1->active_ = true;
@@ -282,8 +301,10 @@ void setPosCallback(const arduino_pkg::SetPosition::Request &req, arduino_pkg::S
     mc1->ri_ = enc1->p_;
     mc1->r_ = enc1->p_;
 
-    mc1->ti_ = t_new;
-    mc1->T_ = t_new+20.0*1e6;
+    mc1->ti_ = micros();
+
+    
+    mc1->T_ = micros() + (abs(req.encoder - enc1->p_))/V_MAX*(15.0/8.0)*1e6;
     
     res.success = true;
     
@@ -346,6 +367,7 @@ void loop() {
         updateState();
         state_publisher.publish(&state); r.data = mc1->r_;
         r_publisher.publish(&r); 
+        control_publisher.publish(&control); 
         t_old_serial = t_new;
     }
 #endif
