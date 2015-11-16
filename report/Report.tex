@@ -40,7 +40,7 @@ The minimum jerk equation is an important part of creating smooth control. When 
     \textbf{Then:}
   \end{tabular}
   \begin{align}
-    x(t) &= x_i +  (x_f - x_i) \cdot \left[10\left(\frac{t}{T}\right)^4 \right]\label{eq:mje}
+    x(t) &= x_i +  (x_f - x_i) \cdot \left[10\left(\frac{t}{T}\right)^3 - 15\left(\frac{t}{T}\right)^4 + 6\left(\frac{t}{T}\right)^6 \right]\label{eq:mje}
   \end{align}}
 \par
 
