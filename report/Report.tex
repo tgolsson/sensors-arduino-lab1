@@ -12,9 +12,8 @@
 \listoffigures % List of all figures
 \lstlistoflistings % List of all code snippets
 \lstset{ matchrangestart=t} %initialise the linerange-macro for \lstinput...
-\section{Hardware}
-The laboration is performed using an \emph{Arduino Due} microcontroller 
-\section{Implementation of a PID controller}
+\section{Theory and motivation}
+\subsection{PID controller}
 PID in the name PID-controller is short for \emph{P}roportional-\emph{Integral}-\emph{Derivative}-controller. As this implies, the controlling signal is based on a proportion of the current value, the previous values, and the rate of change of the observed value. The mathemathical formulation of this can be seen in \vref{eq:pid}.\par \vspace{10pt}
 {\footnotesize
   \begin{tabular}{l l l}
@@ -41,8 +40,7 @@ The minimum jerk equation is an important part of creating smooth control. When 
     \textbf{Then:}
   \end{tabular}
   \begin{align}
-    x(t) &= x_i +  (x_f - x_i) \cdot \left[10\left(\frac{t}{T}\right)^3 - 15\left(\frac{t}{T}\right)^4 + 6\left(\frac{t}{T}\right)^6 \right]\label{eq:mje}
-          
+    x(t) &= x_i +  (x_f - x_i) \cdot \left[10\left(\frac{t}{T}\right)^3 - 15\left(\frac{t}{T}\right)^4 + 6\left(\frac{t}{T}\right)^6 \right]\label{eq:mje}          
   \end{align}}
 
 The $T$ parameter has to be estimated. If $T$ is much larger than  the actual time that is needed for the trajectory, the velocity will be very low, and if $T$ is too low $x(t)$ will approach infinity unless $\frac{t}{T}$ is clamped to $[0,1]$. However, this solution is not optimal. Instead, we choose to calculate the derivative $\frac{dx}{dt}$, and this can be seen in \ref{eq:derivative}.
@@ -51,10 +49,21 @@ The $T$ parameter has to be estimated. If $T$ is much larger than  the actual ti
 \end{align}
 \par
 
-\section{Position controller}
+\section{Implementation}
+% TODO add task description here
+
+\subsection{Hardware}
+The laboration is performed using an \emph{Arduino Due} microcontroller
+\subsection{Position controller}
 Describe the implementation of the position controller
-\section{Velocity controller}
+\subsection{Velocity controller}
 Describe the implementation of the velocity controller
+
+
+\section{Verification and results}
+\subsection{PID-tuning}
+\subsection{Results}
+
 \end{document}
 
 
