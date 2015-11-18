@@ -13,11 +13,17 @@
 #include <std_msgs/Float32.h>
 #endif
 
-const int ENCODER_PIN = 7;
-const double KP = 30.0,
+const int
+ENCODER_PIN = 7,
+    TOLERANCE = 3;
+const double
+    KP = 50.0,
     KI = 0,
-    KD = 0.0;
-const double V_MAX = 280.0;
+    KD = 0.0,
+    V_MAX = 280.0,
+    TICKS_ROTATION = 235.0,
+        TIME_SCALE = 1e6; // 1-over-micro; as time is counted in microseconds
+   
 //======================= Struct Definitions ======================
 //this struct holds the state values of a desired control point
 struct ControlStates
@@ -66,8 +72,9 @@ struct EncoderStates
 {
     int ENC_; //pin for the encoder
     int p_;   //current encoder pulses
+    int pp_; //previous p
     float dp_;//time-derivative of the encoder pulses
-
+    
 EncoderStates(int PIN, int pos) : ENC_(PIN), p_(pos) {
     dp_ = 0;
 };
@@ -208,6 +215,8 @@ void readEncoder() {
         enc1->p_++;
     else
         enc1->p_--;
+    
+         
 }
 
 void actuate(float control, MotorShieldPins *mps) {
@@ -224,16 +233,16 @@ void actuate(float control, MotorShieldPins *mps) {
 //--------------------------------------------------------------------------
 void positionControl(ControlStates* c_s, EncoderStates* e_s, MotorShieldPins* m_pins, PIDParameters* pid_p)
 {
-    //TODO:
-    // -update the setpoint using minimum Jerk DONE
-    // -calculate position error DONE
-    // -calculate derivative of the position error DONE
-    // -update the control states for the next iteration DONE
 
-    // -compute control using pid() DONE
+    enc1->dp_ = enc1->dp_ * 0.99 + 0.01*(enc1->p_ - enc1->pp_)/(dT/TIME_SCALE);  // dT = 1000 us = 0.001 s
+    enc1->pp_ = enc1->p_;
 
+    if (abs(enc1->p_ - c_s->rf_) < TOLERANCE)
+    {
+        c_s->u_ = 0;
+        return;
+    }
     double setPoint = minimumJerk(c_s->ti_, (double)t_new, c_s->T_, c_s->ri_, c_s->rf_);
-
     c_s->r_ = setPoint;
     double e = (c_s->r_ - e_s->p_); // USED
 
@@ -253,13 +262,24 @@ void positionControl(ControlStates* c_s, EncoderStates* e_s, MotorShieldPins* m_
 //--------------------------------------------------------------------------
 void velocityControl(ControlStates* c_s, EncoderStates* e_s, MotorShieldPins* m_pins, PIDParameters* pid_p)
 {
-    //TODO:
-    // -update the setpoint using minimum Jerk
-    // -calculate velocity error
-    // -calculate derivative of the velocity error
-    // -update the control states for the next iteration
 
-    // -compute control using pid()
+    enc1->dp_ = enc1->dp_ * 0.99 + 0.01*(enc1->p_ - enc1->pp_)/(dT/TIME_SCALE);  // dT = 1000 us = 0.001 s
+    enc1->pp_ = enc1->p_;
+    double setPoint = minimumJerk(c_s->ti_, (double)t_new, c_s->T_, c_s->ri_, c_s->rf_);
+
+    c_s->r_ = setPoint;
+    double e = (c_s->r_ - e_s->dp_); // USED
+
+    double de = (c_s->e_ - e) / dT;
+
+    
+    c_s->e_ = e;
+    c_s->de_ = de;
+
+    double ut = pid(e, de, pid_p);
+
+    c_s->u_ = ut;
+
 }
 //--------------------------------------------------------------------------
 float minimumJerk(float t0, float t, float T, float q0, float qf)
@@ -296,16 +316,16 @@ void updateState() {
 
 //////////////////////ROS Services ////////////////////////////////////
 void setPosCallback(const arduino_pkg::SetPosition::Request &req, arduino_pkg::SetPosition::Response &res) {
-    mc1->active_ = true;
+
     mc1->rf_ = req.encoder;
     mc1->ri_ = enc1->p_;
     mc1->r_ = enc1->p_;
+    pid_mc1->I_ = 0;
 
     mc1->ti_ = micros();
+    mc1->T_ = micros() + (abs(req.encoder - enc1->p_))/(V_MAX)*(15.0/8.0)*1e6;
 
-    
-    mc1->T_ = micros() + (abs(req.encoder - enc1->p_))/V_MAX*(15.0/8.0)*1e6;
-    
+    mc1->active_ = true;
     res.success = true;
     
 }
@@ -321,6 +341,14 @@ void setPIDCallback(const arduino_pkg::SetPID::Request &req, arduino_pkg::SetPID
 
 void setVelCallback(const arduino_pkg::SetVelocity::Request &req, arduino_pkg::SetVelocity::Response &res) {
 
+    mc1->rf_ = req.ticksPerSecond;
+    mc1->ri_ = enc1->dp_;
+    mc1->r_ = enc1->dp_;
+    pid_mc1->I_ = 0;
+
+    mc1->ti_ = micros();
+
+    mc1->T_ = micros() + abs(mc1->ri_ - mc1->rf_) * 0.006*1e6;
     mc1->active_ = false;    
     res.success = true;
     
@@ -366,7 +394,7 @@ void loop() {
     if (abs(t_new - t_old_serial) > dT_serial) {
         updateState();
         state_publisher.publish(&state); r.data = mc1->r_;
-        r_publisher.publish(&r); 
+        r_publisher.publish(&r); control.data = enc1->dp_;
         control_publisher.publish(&control); 
         t_old_serial = t_new;
     }

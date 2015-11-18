@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="arduino_pkg" name="config_node" type="arduino_node" />
+<!--  <node pkg="rosserial_python" name="comm_node" type="serial_node.py" args="${/dev/ttyACM3}" />-->
+  <node pkg="rqt_plot" name="plot_node" type="rqt_plot" />
+  <node pkg="rqt_reconfigure" name="config_node_gui" type="rqt_reconfigure" />
+</launch>

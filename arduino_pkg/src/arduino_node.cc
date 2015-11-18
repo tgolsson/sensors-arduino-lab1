@@ -36,15 +36,31 @@ private:
 
   ///callback for the dynamic reconfigure events
   ///TODO: don't forget to fill in the correct parameters in the cfg/arduino_node.cfg file
-  void configCallback(arduino_pkg::arduino_nodeConfig &config, uint32_t level)
-  {
-      ROS_INFO("Received a request to change PID parameters");
-      //read out configs
-      //TODO: here read the parameters from the updated config and call the PID service 
-      arduino_pkg::SetPID pid_request;
-      //TODO: next, call the service with the correct parameters
 
-  } 
+   void configCallback(arduino_pkg::arduino_nodeConfig &config, uint32_t level)
+   {
+       ROS_INFO("Received a request to change PID parameters");
+
+       //read out configs
+      //TODO: here read the parameters from the updated config and call the PID service
+      
+      double kp, kd, ki;
+
+      kp = config.pid_p;
+      ki = config.pid_i;
+      kd = config.pid_d;
+       arduino_pkg::SetPID pid_request;
+       //TODO: next, call the service with the correct parameters
+      pid_request.request.k_p = kp;
+      pid_request.request.k_d = kd;
+      pid_request.request.k_i = ki;
+
+      request_pid_.call(pid_request);
+
+
+      
+ 
+   } 
 };
 
 
