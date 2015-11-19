@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.11.19)  19 NOV 2015 11:56
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.11.19)  19 NOV 2015 12:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -966,7 +966,7 @@ File: siunitx-abbreviations.cfg 2015/10/15 v2.6m siunitx: Abbreviated units
 \openout4 = `Report.lol'.
 
 
-Overfull \hbox (4.73407pt too wide) in paragraph at lines 35--42
+Overfull \hbox (2.18436pt too wide) in paragraph at lines 35--42
 [][] 
  []
 
@@ -989,38 +989,40 @@ See the caption package documentation for explanation.
 
 [2] [3] (./Report.aux) ) 
 Here is how much of TeX's memory you used:
- 15727 strings out of 494953
- 299739 string characters out of 6178088
+ 15731 strings out of 494953
+ 299789 string characters out of 6178088
  347625 words of memory out of 5000000
- 18794 multiletter control sequences out of 15000+600000
- 20679 words of font info for 58 fonts, out of 8000000 for 9000
+ 18795 multiletter control sequences out of 15000+600000
+ 22975 words of font info for 61 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  42i,13n,60p,10475b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/prunebutt/.texmf-var/fonts/pk/ljfour/jknappen/e
-c/ecti0900.600pk> </home/prunebutt/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0
-900.600pk> </home/prunebutt/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600
-pk> </home/prunebutt/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> </h
-ome/prunebutt/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/pru
-nebutt/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/prunebutt/
-.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/prunebutt/.texmf-
-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/prunebutt/.texmf-var/fon
-ts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/prunebutt/.texmf-var/fonts/pk/l
-jfour/jknappen/ec/ecrm1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cmextra/cmex9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy9.pfb>
-Output written on Report.pdf (3 pages, 170948 bytes).
+c/ecrm0800.600pk> </home/prunebutt/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0
+900.600pk> </home/prunebutt/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600
+pk> </home/prunebutt/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </h
+ome/prunebutt/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600pk> </home/pru
+nebutt/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> </home/prunebutt/
+.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/prunebutt/.texmf-
+var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/prunebutt/.texmf-var/fon
+ts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/prunebutt/.texmf-var/fonts/pk/l
+jfour/jknappen/ec/ecrm1200.600pk> </home/prunebutt/.texmf-var/fonts/pk/ljfour/j
+knappen/ec/ecrm1000.600pk> </home/prunebutt/.texmf-var/fonts/pk/ljfour/jknappen
+/ec/ecrm1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra
+/cmex9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy9.pfb>
+Output written on Report.pdf (3 pages, 171235 bytes).
 PDF statistics:
- 318 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 335 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

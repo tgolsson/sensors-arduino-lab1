@@ -19,12 +19,12 @@ PID in the name PID-controller is short for \emph{P}roportional-\emph{Integral}-
   \begin{tabular}{l l l}
     \textbf{Let:} \\
  &$e(t)$ &be some error measurement between current state and preferred state\\
- &$K_p$, $K_i$, $K_d$ &be the respective weights for the proportional, integral and derivate terms \\
+ &$\di{K}{p}$, $\di{K}{i}$, $\di{K}{d}$ &be the respective weights for the proportional, integral and derivate terms \\
  &$u(t)$ &be the output signal at time \emph{t} \\
     \textbf{Then:}
   \end{tabular}
   \begin{align}
-    u(t) &= K_p\cdot e(t) + K_i \cdot\int_{0}^{t}e(\tau)\cdot \dif\tau + K_d \cdot \od{e(t)}{t}\label{eq:pid}
+    u(t) &= \di{K}{p}\cdot e(t) + \di{K}{i} \cdot\int_{0}^{t}e(\tau)\cdot \dif\tau + \di{K}{d} \cdot \od{e(t)}{t}\label{eq:pid}
   \end{align}}
 \par
 
@@ -34,41 +34,41 @@ The minimum jerk equation is an important part of creating smooth control. When 
 {\footnotesize
   \begin{tabular}{l l l}
     \textbf{Let:} \\
- &$x_i$, $x_f$ &be the initial and final states\\
+ &$\di{x}{i}$, $\di{x}{f}$ &be the initial and final states\\
  &$t$, $T$ &be the elapsed time since the action started, and the preferred total time for the action  \\
  &$x(t)$ &be the estimated state at time \emph{t} \\
     \textbf{Then:}
   \end{tabular}
   \begin{align}
-    x(t) &= x_i +  (x_f - x_i) \cdot \left[10\left(\frac{t}{T}\right)^3 - 15\left(\frac{t}{T}\right)^4 + 6\left(\frac{t}{T}\right)^6 \right]\label{eq:mje}          
+    x(t) &= \di{x}{i} +  (\di{x}{f} - \di{x}{i}) \cdot \left[10\left(\frac{t}{T}\right)^3 - 15\left(\frac{t}{T}\right)^4 + 6\left(\frac{t}{T}\right)^6 \right]\label{eq:mje}          
   \end{align}}
 
-The $T$ parameter has to be estimated. If $T$ is much larger than  the actual time that is needed for the trajectory, the velocity will be very low, and if $T$ is too low $x(t)$ will approach infinity unless $\frac{t}{T}$ is clamped to $[0,1]$. However, this solution is not optimal. Instead, we choose to calculate the optimal time $T_{opt}$ as follows.%, and this can be seen in \ref{eq:derivative}.
+The $T$ parameter has to be estimated. If $T$ is much larger than  the actual time that is needed for the trajectory, the velocity will be very low, and if $T$ is too low $x(t)$ will approach infinity unless $\frac{t}{T}$ is clamped to $[0,1]$. However, this solution is not optimal. Instead, we choose to calculate the optimal time $\di{T}{opt}$ as follows.%, and this can be seen in \ref{eq:derivative}.
 \par
-For finding out the optimal time $T_{opt}$, we substitute:
+For finding out the optimal time $\di{T}{opt}$, we substitute:
 \begin{align}
   \label{eq:tau_substitution}
   \tau:=\frac{t}{T}
 \end{align}
 \begin{align}
-\ref{eq:mje}\Rightarrow x(\tau)&= x_i +  (x_f - x_i) \cdot \left(10\tau^3 - 15\tau^4 + 6\tau^6 \right)\\
-\od{x(\tau)}{\tau}&= (x_f - x_i)\cdot(30\tau^2-60\tau^3+36\tau^5)\label{eq:dx_dtau}
+\ref{eq:mje}\Rightarrow x(\tau)&= \di{x}{i} +  (\di{x}{f} - \di{x}{i}) \cdot \left(10\tau^3 - 15\tau^4 + 6\tau^6 \right)\\
+\od{x(\tau)}{\tau}&= (\di{x}{f} - \di{x}{i})\cdot(30\tau^2-60\tau^3+36\tau^5)\label{eq:dx_dtau}
 \end{align}
 \ref{eq:dx_dtau} reaches its' maximum at $\tau=0.5$ (proof trivial) with the value:
 \begin{align}
-  \eval{\od{x(\tau)}{\tau}}_{\tau=0.5}&=\frac{15}{18}\cdot(x_f - x_i)
+  \eval{\od{x(\tau)}{\tau}}_{\tau=0.5}&=\frac{15}{18}\cdot(\di{x}{f} - \di{x}{i})
 \end{align}
 In order to make this term dependent on $T$, we must resubstitute:
 \begin{align}
   \ref{eq:tau_substitution}\Rightarrow \od{\tau}{t}&=\frac{1}{T}\\
   \Rightarrow\dif\tau&=\dif t\cdot\frac{1}{T}\label{eq:dtau_resubs}\\
-  \ref{eq:dx_dtau},\ref{eq:dtau_resubs}\Rightarrow\eval{T\cdot\od{x(\tau)}{t}}_{\tau=0.5}&=\frac{15}{18}\cdot(x_f - x_i)\\
-  \Rightarrow\eval{\od{x(\tau)}{t}}_{\tau=0.5}&=\frac{15}{18}\cdot\frac{x_f - x_i}{T}\label{eq:dx_dt}
+  \ref{eq:dx_dtau},\ref{eq:dtau_resubs}\Rightarrow\eval{T\cdot\od{x(\tau)}{t}}_{\tau=0.5}&=\frac{15}{18}\cdot(\di{x}{f} - \di{x}{i})\\
+  \Rightarrow\eval{\od{x(\tau)}{t}}_{\tau=0.5}&=\frac{15}{18}\cdot\frac{\di{x}{f} - \di{x}{i}}{T}\label{eq:dx_dt}
 \end{align}
-Now, if we state an optimal maximum velocity $v_{opt}$ for the minimum jerk equation, we can calculate the optimal time $T_{opt}$ for this velocity:
+Now, if we state an optimal maximum velocity $\di{v}{opt}$ for the minimum jerk equation, we can calculate the optimal time $\di{T}{opt}$ for this velocity:
 \begin{align}
-  \Rightarrow\eval{\od{x(\tau)}{t}}_{\tau=0.5}&=v_{opt}\\
-  \ref{eq:dx_dt}\Rightarrow T_{opt}&=\frac{15}{18}\cdot\frac{x_f - x_i}{v_{opt}}
+  \Rightarrow&\eval{\od{x(\tau)}{t}}_{\tau=0.5}=\di{v}{opt}\\
+  \ref{eq:dx_dt}\Rightarrow& \di{T}{opt}=\frac{15}{18}\cdot\frac{\di{x}{f} - \di{x}{i}}{\di{v}{opt}}
 \end{align}
 \par
 
