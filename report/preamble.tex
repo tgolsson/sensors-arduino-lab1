@@ -9,7 +9,7 @@
 \usepackage{siunitx}\usepackage{wrapfig}
 \usepackage{varioref}\usepackage{amsmath}
 \usepackage{commath}
-
+\usepackage{mathtools}
 
 \setlength{\belowcaptionskip}{-6pt}
 \makeatletter
@@ -47,17 +47,18 @@
   showtabs=false,                  % show tabs within strings adding particular underscores
   stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
   tabsize=2,                   % sets default tabsize to 2 spaces
-  language=Octave,
   framesep=7pt,
   xleftmargin=12pt,
   xrightmargin=11pt
 }
 
+
 \setlength{\fboxsep}{4pt}
 \DeclareCaptionFormat{myformat}{%
-  \hspace{1pt}\fcolorbox{blue!20}{gray!20}{\footnotesize\parbox{\dimexpr\textwidth-17pt\fboxsep\fboxrule\relax}{#1#2\ttfamily#3}}\vspace{-4pt}
+  \hspace{1pt}\fcolorbox{blue!20}{gray!20}{\footnotesize\parbox{\dimexpr\textwidth-17pt\relax}{#1#2\ttfamily#3}}\vspace{-4pt}
 }
 \captionsetup[lstlisting]{format=myformat}
+
 \captionsetup[figure]{labelfont=sf,hypcap=false,format=hang,margin=0.5cm,justification=RaggedRight,calcwidth=0.7\linewidth,font=footnotesize,justification=justified}
 \captionsetup[table]{labelfont=sf,hypcap=false,format=hang,margin=1cm,justification=RaggedRight,calcwidth=0.8\linewidth,font=footnotesize,justification=justified}
 \labelformat{equation}{(#1)}

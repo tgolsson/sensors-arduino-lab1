@@ -13,5 +13,11 @@
     "art11")
    (LaTeX-add-labels
     "eq:pid"
-    "eq:mje")))
+    "eq:mje"
+    "eq:tau_substitution"
+    "eq:dx_dtau"
+    "eq:dtau_resubs"
+    "eq:dx_dt"
+    "fig:pos"
+    "fig:ve")))
 
