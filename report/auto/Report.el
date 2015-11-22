@@ -17,12 +17,13 @@
     "eq:mje"
     "eq:tau_substitution"
     "eq:dx_dtau"
+    "eq:dx_1518"
     "eq:dtau_resubs"
     "eq:dx_dt"
     "eq:t_opt"
     "tab:measurements"
     "fig:pos"
-    "fig:ve")
+    "fig:vel")
    (LaTeX-add-bibitems
     "datasheet_motor_1"
     "datasheet_motor_2")))

@@ -152,17 +152,6 @@ void setup() {
     t_old = micros();
     t_old_serial = micros();
 
-    //TODO:
-    // -setup serial port for first task. Remove once you start using rosserial_arduino!
-    // -set the resolution of the analogWrite(...) function to 12 bit, i.e., between 0 - 4095
-    // -set the resolution of the analogRead(...) function to 12 bit, i.e., between 0 - 4095
-    // -setup pins for motor shield
-    // -write initial values, switch on break
-    // -setup encoder pin
-    // -turn on pullup resistor for encoder
-    // -add interrupt and connect it to readEncoder function
-    // -write default low value to PWM
-
 #if ROS_SUPPORT == 0
     Serial.begin(9600);
 #endif
@@ -210,103 +199,103 @@ void setup() {
 }
 
 void readEncoder() {
-    //TODO: -check motor direction and increment encoder
     if (digitalRead(motor1->DIR_))
         enc1->p_++;
     else
         enc1->p_--;
-    
-         
 }
 
-void actuate(float control, MotorShieldPins *mps) {
-    //TODO: check motor direction, clamp control value inside pwm_resolution and write pwm
+void actuate(float control, MotorShieldPins *mps)
+{
+    // Set motor direction based on sign of control value
+    digitalWrite(mps->DIR_, control < 0 ? LOW : HIGH);
 
+    // Force to positive and make sure it is in allowed control range
     double controlNew = abs(control);
     controlNew = max(min(pwm_resolution, controlNew), 0);
 
-    digitalWrite(mps->DIR_, control < 0 ? LOW : HIGH);
+    // Write to pin
     analogWrite(mps->PWM_, controlNew);
-    control = controlNew;
 }
-
 //--------------------------------------------------------------------------
 void positionControl(ControlStates* c_s, EncoderStates* e_s, MotorShieldPins* m_pins, PIDParameters* pid_p)
 {
-
+    // Sliding sum for encoder speed
     enc1->dp_ = enc1->dp_ * 0.99 + 0.01*(enc1->p_ - enc1->pp_)/(dT/TIME_SCALE);  // dT = 1000 us = 0.001 s
     enc1->pp_ = enc1->p_;
 
+    // Early escape to prevent "almost-there" PWM-hum
     if (abs(enc1->p_ - c_s->rf_) < TOLERANCE)
     {
         c_s->u_ = 0;
         return;
     }
+
+    // Set-point calculation
     double setPoint = minimumJerk(c_s->ti_, (double)t_new, c_s->T_, c_s->ri_, c_s->rf_);
     c_s->r_ = setPoint;
-    double e = (c_s->r_ - e_s->p_); // USED
 
+    // Error and error derivative
+    double e = (c_s->r_ - e_s->p_);
     double de = (c_s->e_ - e) / dT;
 
-    
-    c_s->e_ = e;
-    c_s->de_ = de;
-
+    // Get PID output
     double ut = pid(e, de, pid_p);
 
+    // Store for next cycle
+    c_s->e_ = e;
+    c_s->de_ = de;
     c_s->u_ = ut;
-    
-
-    
 }
+
 //--------------------------------------------------------------------------
 void velocityControl(ControlStates* c_s, EncoderStates* e_s, MotorShieldPins* m_pins, PIDParameters* pid_p)
 {
-
+    // Sliding sum for encoder speed
     enc1->dp_ = enc1->dp_ * 0.99 + 0.01*(enc1->p_ - enc1->pp_)/(dT/TIME_SCALE);  // dT = 1000 us = 0.001 s
     enc1->pp_ = enc1->p_;
+
+    //Set-point calculation
     double setPoint = minimumJerk(c_s->ti_, (double)t_new, c_s->T_, c_s->ri_, c_s->rf_);
-
     c_s->r_ = setPoint;
-    double e = (c_s->r_ - e_s->dp_); // USED
 
+    // Error and error derivative
+    double e = (c_s->r_ - e_s->dp_); 
     double de = (c_s->e_ - e) / dT;
 
-    
-    c_s->e_ = e;
-    c_s->de_ = de;
-
+    // Get PID output
     double ut = pid(e, de, pid_p);
 
+    // Store for next cycle
+    c_s->e_ = e;
+    c_s->de_ = de;
     c_s->u_ = ut;
-
 }
+
+
 //--------------------------------------------------------------------------
 float minimumJerk(float t0, float t, float T, float q0, float qf)
 {
-    //TODO: calculate minimumJerk set point
+    // Calculate t / T. Clamp to [0,1] to prevent value explosion
     double tbyT = min((t-t0)/(T-t0),1);
+    // Minimum jerk equation.
     return (q0 + (qf - q0) * (10.0 * pow(tbyT,3.0) - 15.0 * pow(tbyT,4.0) + 6.0 * pow(tbyT,5.0)));
 }
 //--------------------------------------------------------------------------
 float pid(float e, float de, PIDParameters* p)
 {
-    //TODO:
-    // -update the integral term
-    // -compute the control value
-    // -clamp the control value and if necessary back-calculate the integral term (to avoid windup)
-    // -return control value
+    // Update integral term
     p->I_ += e*dT;
+    // Calculate output value
     double ut =  p->Kp_*e + p->Ki_ * p->I_ + p->Kd_ * de;
+    // Clamp to maixmum and minimum value before returning
     ut = min(max(p->u_min_, ut), p->u_max_);
     return ut;
-    
 }
 
 #if ROS_SUPPORT
 //--------------------------------------------------------------------------
 void updateState() {
-    
     state.brake = digitalRead(motor1->BRK_);
     state.direction = digitalRead(motor1->DIR_);
     state.current = analogRead(motor1->CUR_);
@@ -315,54 +304,58 @@ void updateState() {
 }
 
 //////////////////////ROS Services ////////////////////////////////////
-void setPosCallback(const arduino_pkg::SetPosition::Request &req, arduino_pkg::SetPosition::Response &res) {
-
-    mc1->rf_ = req.encoder;
+void setPosCallback(const arduino_pkg::SetPosition::Request &req, arduino_pkg::SetPosition::Response &res)
+{
+    // Start and end state of encoder
+    mc1->rf_ = req.encoder; 
     mc1->ri_ = enc1->p_;
     mc1->r_ = enc1->p_;
+
+    // Reset integral
     pid_mc1->I_ = 0;
 
+    // Start and end times
     mc1->ti_ = micros();
     mc1->T_ = micros() + (abs(req.encoder - enc1->p_))/(V_MAX)*(15.0/8.0)*1e6;
 
+    // Activate controller
     mc1->active_ = true;
     res.success = true;
-    
 }
 
 void setPIDCallback(const arduino_pkg::SetPID::Request &req, arduino_pkg::SetPID::Response &res) {
     pid_mc1->Kd_ = req.k_d;
     pid_mc1->Kp_ = req.k_p;
     pid_mc1->Ki_ = req.k_i;
-    res.success = true;
-    
+    res.success = true;    
 }
 
-void setVelCallback(const arduino_pkg::SetVelocity::Request &req, arduino_pkg::SetVelocity::Response &res) {
-
+void setVelCallback(const arduino_pkg::SetVelocity::Request &req, arduino_pkg::SetVelocity::Response &res)
+{
+    // Start and end state of encoder
     mc1->rf_ = req.ticksPerSecond;
     mc1->ri_ = enc1->dp_;
     mc1->r_ = enc1->dp_;
+
+    // Reset integral
     pid_mc1->I_ = 0;
 
+    // Start and end time
     mc1->ti_ = micros();
-
+    // 0.006  = 3 s / 560 tps -- acceleration constant
     mc1->T_ = micros() + abs(mc1->ri_ - mc1->rf_) * 0.006*1e6;
+
+    // Activate correct controller
     mc1->active_ = false;    
     res.success = true;
-    
 }
 
 void setOn(const std_srvs::Empty::Request &req, std_srvs::Empty::Response &res) {
     mc1->on_ = true; 
-    
-    
 }
 
 void setOff(const std_srvs::Empty::Request &req, std_srvs::Empty::Response &res) {
     mc1->on_ = false;
-    
-    
 }
 #endif
 
@@ -406,17 +399,16 @@ void loop() {
         return;
     t_old = t_new;
 
-    //TODO:
-    // -read in current sensor
-    // -if mc1 is active, calculate position control and actuate
+    // Do nothing
+    if (mc1->on_)
+    {
+        if (mc1->active_)
+            positionControl(mc1, enc1, motor1, pid_mc1);
+        else
+            velocityControl(mc1, enc1, motor1, pid_mc1);
+        actuate(mc1->u_, motor1);
+    }
 
-    // -if in velocity control mode, calculate with velocity control and actuate
-    if (mc1->active_)
-        positionControl(mc1, enc1, motor1, pid_mc1);
-    else
-        velocityControl(mc1, enc1, motor1, pid_mc1);
-
-    actuate(mc1->u_, motor1);
 #if ROS_SUPPORT==0
     Serial.print("Encoder = ");
     Serial.println(enc1->p_);

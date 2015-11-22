@@ -20,7 +20,8 @@
     "varioref"
     "amsmath"
     "commath"
-    "mathtools")
+    "mathtools"
+    "url")
    (TeX-add-symbols
     '("di" 2))
    (LaTeX-add-caption-DeclareCaptions

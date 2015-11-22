@@ -48,37 +48,30 @@ The minimum jerk equation is an important part of creating smooth control. When 
 The $T$ parameter has to be estimated. If $T$ is much larger than  the actual time that is needed for the trajectory, the velocity will be very low, and if $T$ is too low $x(t)$ will approach infinity unless $\frac{t}{T}$ is clamped to $[0,1]$. However, this solution is not optimal. Instead, we choose to calculate the optimal time $\di{T}{opt}$ as follows.%, and this can be seen in \ref{eq:derivative}.
 \par
 For finding out the optimal time $\di{T}{opt}$, we substitute:
-\begin{equation}
+{
+  \footnotesize
+\begin{align}
   \label{eq:tau_substitution}
-  \tau:=\frac{t}{T}
-\end{equation}
-\vspace{-6mm}
-\begin{align}
-\ref{eq:mje}\Rightarrow x(\tau)&= \di{x}{i} +  (\di{x}{f} - \di{x}{i}) \cdot \left(10\tau^3 - 15\tau^4 + 6\tau^6 \right)\\
-\od{x(\tau)}{\tau}&= (\di{x}{f} - \di{x}{i})\cdot(30\tau^2-60\tau^3+36\tau^5)\label{eq:dx_dtau}
-\end{align}
-\ref{eq:dx_dtau} reaches its' maximum at $\tau=0.5$ (proof trivial) with the value:
-\begin{align}
-  \eval{\od{x(\tau)}{\tau}}_{\tau=0.5}&=\frac{15}{18}\cdot(\di{x}{f} - \di{x}{i})
-\end{align}
-In order to make this term dependent on $T$, we must resubstitute:
-\begin{align}
-  \ref{eq:tau_substitution}&\Rightarrow %\od{\tau}{t}
+  \hfill\tau:&=\frac{t}{T}\\
+  \ref{eq:mje}\Rightarrow \hspace{50pt} x(\tau)&= \di{x}{i} +  (\di{x}{f} - \di{x}{i}) \cdot \left(10\tau^3 - 15\tau^4 + 6\tau^6 \right)\\
+   \od{x(\tau)}{\tau}&= (\di{x}{f} - \di{x}{i})\cdot\left(30\tau^2-60\tau^3+36\tau^5\right)\label{eq:dx_dtau}\\
+  \intertext{\normalsize \ref{eq:dx_dtau} reaches its' maximum at $\tau=0.5$ (proof trivial) with the value:}
+  \eval{\od{x(\tau)}{\tau}}_{\tau=0.5}&=\frac{15}{18}\cdot(\di{x}{f} - \di{x}{i})\label{eq:dx_1518} \\
+\intertext{\normalsize In order to make this term dependent on $T$, we must resubstitute \vref{eq:tau_substitution} into \vref{eq:dx_1518}.}
+  \ref{eq:tau_substitution}\Rightarrow \hspace{63pt}%\od{\tau}{t}
 \dot{\tau}
-=\frac{1}{T}\\
-  &\Rightarrow\dif\tau=\dif t\cdot\frac{1}{T}\label{eq:dtau_resubs}\\
-  \ref{eq:dx_dtau},\ref{eq:dtau_resubs}&\Rightarrow%\eval{T\cdot\od{x(\tau)}{t}}_{\tau=0.5}=\frac{15}{18}\cdot(\di{x}{f} - \di{x}{i})\\
+&=\frac{1}{T}\\
+  \Rightarrow\hspace{58pt}\dif\tau&=\dif t\cdot\frac{1}{T}\label{eq:dtau_resubs}\\
+  \ref{eq:dx_dtau},\ref{eq:dtau_resubs}\Rightarrow\hspace{24pt}%\eval{T\cdot\od{x(\tau)}{t}}_{\tau=0.5}&=\frac{15}{18}\cdot(\di{x}{f} - \di{x}{i})\\
 %  &\Rightarrow
 \eval{\od{x(\tau)}{t}}
 %\dot{\tau}}
-_{\tau=0.5}=\frac{15}{18}\cdot\frac{\di{x}{f} - \di{x}{i}}{T}\label{eq:dx_dt}
+_{\tau=0.5}&=\frac{15}{18}\cdot\frac{\di{x}{f} - \di{x}{i}}{T}\label{eq:dx_dt}\\
+\intertext{\normalsize Now, if we state an optimal maximum velocity $\di{v}{opt}$ for the minimum jerk equation, we can calculate the optimal time $\di{T}{opt}$ for this velocity.}
+  \Rightarrow\hspace{25pt}\eval{\od{x(\tau)}{t}}_{\tau=0.5}&=\di{v}{opt}\\
+  \ref{eq:dx_dt}\Rightarrow\hspace{52pt} \di{T}{opt}&=\frac{15}{18}\cdot\frac{\di{x}{f} - \di{x}{i}}{\di{v}{opt}}\label{eq:t_opt}
 \end{align}
-Now, if we state an optimal maximum velocity $\di{v}{opt}$ for the minimum jerk equation, we can calculate the optimal time $\di{T}{opt}$ for this velocity:
-\begin{align}
-  \Rightarrow&\eval{\od{x(\tau)}{t}}_{\tau=0.5}=\di{v}{opt}\\
-  \ref{eq:dx_dt}\Rightarrow& \di{T}{opt}=\frac{15}{18}\cdot\frac{\di{x}{f} - \di{x}{i}}{\di{v}{opt}}\label{eq:t_opt}
-\end{align}
-\par
+}\par
 
 \section{Implementation}
 The purpose of this exercise is to implement a PID-controller using the minimum jerk trajectory, and use this implementation for both a \emph{set-position} mode of operation, as well as a \emph{set-velocity} mode of operation. An important part of this exercise is the tuning of the PID-parameters for either mode of operation. \par
@@ -88,52 +81,55 @@ The laboration is performed using an \emph{Arduino Due} microcontroller, with th
 
 The motor used is the \emph{Micro Motors RHE158 75:1 12V DC}, connected to the motor shield. As the USB-bus cannot supply enough power to drive the motor, an external 12V power adapter was used.
 \paragraph{Measurements}
-In order to ensure correct behaviour, the amount of tics per revolution as well as the maximum velocity of the motor was measured and compared to the datasheet \cite{datasheet_motor_1},\cite{datasheet_motor_2}.
+In order to ensure correct behaviour, the amount of tics per revolution as well as the maximum velocity of the motor was measured and compared to the datasheet \cite{datasheet_motor_1},\cite{datasheet_motor_2}. \par
 \begin{table}[!htbp]
   \centering
-  \caption{Ticks per rotation and maximum ticks per second values}
-  \begin{tabular}{l|ccc}
-    & Ticks per rotation & rps & Ticks per second\\ \hline
-    Datasheet & 230.5 & 1.35 & 311\\
-    Measured & 235.0 & 1.19 & 280
+  \caption{Measured and expected motor characteristics}
+  \begin{tabular}{l|cc}
+    Characteristic & Datasheet & Measured \\ \hline
+    Ticks/rotation & 230.5 &235.0\\ 
+    Ticks/second & 311.0 & 280.0\\
+    Rotations/second & 1.35 & 1.19
   \end{tabular}
   \label{tab:measurements}
 \end{table}
-The maximum speed in the data sheet refers to the motor speed without load. Since there was load present at the laboratory outset, the measured value of ticks per second was used. The Ticks per rotation value was measured turning a varying amount of ticks and seeing when one rotation was completed. This method is expected to be relatively uncertain, since the human eye is not prone to spot these characteristics, but the lack of better equipment for angle measurement drove us to this descision. The tics per second value for maximum speed was measured by applying a duty cycle of 100\% to the PWM and programatically measuring the ticks each second. This measurement technique is considered very exact and is used in the rest of this paper.
+The maximum speed in the data sheet refers to the motor speed without load. Since there was load present at the laboratory outset, the measured value of ticks per second was used. The ticks per rotation value was measured turning a varying amount of ticks and seeing when one rotation was completed. This method is expected to be relatively uncertain, since there is a large possible error margin without proper measuring equipment. In order to improve the measurement, 10 rotations were made, and the result was verified twice. \par
+
+The ticks per second value for maximum speed was measured by applying a duty cycle of 100\% to the PWM and programatically measuring the ticks. Ten measurements were made for 10 seconds each, and the average ticks per second was chosen as the speed value. This measurement is considered very exact and is used in the rest of this paper. 
 
 \subsection{Position controller}
 The first part of the position is the callback for setting a target position. This code is shown in listing \vref{lst:position-callback}. The code updates the mode of operation, and sets the start and end position for the movement. The integral term of the controller is also set to zero. Tests were made without setting it to zero, but this caused unreliable behaviour in some situations, such as when the target position was moved closer to the current position. \par
 
-As can be seen on line TODO, \ref{eq:t_opt} from subsection \vref{sec:mje} is used to calculate the end time point. This ensures that we  reach the maximum speed at $\frac{t}{T} = 0.5$. While this is suboptimal for long trajectories, it makes sure that $T$ is realistic for shorter paths. If long trajectories will be the normal mode of operation; an approach with splines should be used instead of the minimun jerk equation. \par
-
-\lstinputlisting[label=lst:position-callback,caption={Set Position Callback}, linerange={298-312}]{../lab1_stub/lab1_stub.ino}
+As can be seen on line 319, \ref{eq:t_opt} from subsection \vref{sec:mje} is used to calculate the end time point. This ensures that we  reach the maximum speed at $\frac{t}{T} = 0.5$. While this is suboptimal for long trajectories, it makes sure that $T$ is realistic for shorter paths. If long trajectories will be the normal mode of operation; an approach with splines should be used instead of the minimun jerk equation. \par
+\newpage
+\lstinputlisting[label=lst:position-callback,caption={Set Position Callback}, linerange={307-324 }]{../lab1_stub/lab1_stub.ino}
 
 The position controller is implemented to setup the parameters for PID and MJE. The code for this can be see in listing \vref{lst:position-controller}. The minimum jerk function is called with start-time, current time, and end-time, as well as start and end position. The output of this equation is then used to calculate the momentary error, as well as its derivative. These are then given to the PID-controller. \par
 
-\lstinputlisting[label=lst:position-controller,caption=Position Controller ,firstline=225,lastline=252,firstnumber=225]{../lab1_stub/lab1_stub.ino}
+\lstinputlisting[label=lst:position-controller,caption={Position Controller},linerange={221-249}]{../lab1_stub/lab1_stub.ino}
 
 \subsection{Velocity controller}
 As with the position controller, an important part of the velocity controller is the callback for setting the target velocity. This code is shown in listing \vref{lst:velocity-callback}. The only difference to the position callback is the $T$ parameter. This was tested to see the minimum acceptable time to go from full forward speed to full reverse speed, and 3 seconds seemed to be a reasonable value. As the difference in speed is 560 ticks per second; this therefore becomes $\left\lceil\frac{3}{560}\right\rceil _4 = 0.006$. \par
 
-\lstinputlisting[label=lst:velocity-callback,caption=Set Velocity Callback ,firstline=342,lastline=355,firstnumber=342]{../lab1_stub/lab1_stub.ino}
+\lstinputlisting[label=lst:velocity-callback,caption={Set Velocity Callback},linerange={333-351}]{../lab1_stub/lab1_stub.ino}
 
-The velocity controller is also very similar to the position controller, as can be seen in listing \vref{lst:velocity-controller}. As before, the minimum jerk function is called with start-time, current time, and end-time. However, the last two parameters are replaced by  start and end velocity. As can be seen on line TODO the momentary velocity is smoothed using a sliding integral, and normalized to seconds. The reason for this is that the maximum speed of the motor is 235 ticks per second, while the program operates at 1 kHz. The general rule therefore is that no encoder ticks will happen during one program cycle, therefore causing the momentary speed to be measured as 0. After this, the velocity controller continues as the position controller
+The velocity controller is also very similar to the position controller, as can be seen in listing \vref{lst:velocity-controller}. As before, the minimum jerk function is called with start-time, current time, and end-time. However, the last two parameters are replaced by  start and end velocity. As can be seen on line 254-255 the momentary velocity is smoothed using a sliding sum, and normalized to seconds. The reason for this is that the maximum speed of the motor is 235 ticks per second, while the program operates at 1 kHz. The general rule therefore is that no encoder ticks will happen during one program cycle, therefore causing the momentary speed to be measured as 0. After this, the velocity controller continues as the position controller
 
 
-\lstinputlisting[label=lst:velocity-controller,caption=Velocity Controller ,firstline=263,lastline=283,firstnumber=263]{../lab1_stub/lab1_stub.ino}
+\lstinputlisting[label=lst:velocity-controller,caption={Velocity Controller},linerange={252-273}]{../lab1_stub/lab1_stub.ino}
 
 \subsection{PID-controller, minimum jerk and actuation}
 The PID-controller used before matches the equation shown earlier in \vref{eq:pid}. The implementation is shown in listing \vref{lst:pid}.
 
-\lstinputlisting[label=lst:pid,caption=PID-implementation ,firstline=292,lastline=304,firstnumber=292]{../lab1_stub/lab1_stub.ino}
+\lstinputlisting[label=lst:pid,caption={PID-implementation},linerange={285-294}]{../lab1_stub/lab1_stub.ino}
 
 The mimimum jerk equation is also implemented as shown earlier  in \vref{eq:mje}. The only difference is that the fraction $\frac{t}{T}$ is clamped to $[0,1]$. Though this should not be needed with the guarantees made by the calculations of $T$, it was put in as a safeguard. Otherwise, a delayed controller can potentially accumulate an infinite error can lose control. The code for this can be seen in listing \vref{lst:mje}.\par
 
-\lstinputlisting[label=lst:mje,caption=Mimimum jerk implementation ,firstline=285,lastline=290,firstnumber=285]{../lab1_stub/lab1_stub.ino}
+\lstinputlisting[label=lst:mje,caption={Mimimum jerk implementation},linerange={277-283}]{../lab1_stub/lab1_stub.ino}
 
 Lastly, the actuation function is what actually transforms the control value into a PWM output. The function receives the output from the PID-controller, and clamps it to the allowed range as well as setting the direction of the motor. The code for this can be seen in listing \vref{lst:actuate}.
 
-\lstinputlisting[label=lst:actuate,caption=Actuator implementation ,firstline=222,lastline=231,firstnumber=222]{../lab1_stub/lab1_stub.ino}
+\lstinputlisting[label=lst:actuate,caption={Actuator implementation},linerange={208-219}]{../lab1_stub/lab1_stub.ino}
 
 
 \section{Verification and results}
@@ -143,23 +139,26 @@ The tuning of the PID-controller was done in three steps. First, the $k_p$ term 
 After testing, the values $k_p = 60$, $k_i = \num{1e-6}$, and $k_d = 2$ was found to provide the best performance. These parameters were found to provide good results for both velocity and position control. Plots of the behaviours can be seen in figs. \ref{fig:pos} and \vref{fig:vel}. \par
 
 \begin{figure}[h]
-  \begin{subfigure}[b]{.45\textwidth}
-    \includegraphics[width=.5\textwidth]{figures/posplot.png}
-    \caption{Plot of position=bla bla bla}\label{fig:pos}
+  \centering
+  \begin{subfigure}[b]{.9\textwidth}
+    \centering
+    \includegraphics[width=.9\textwidth]{figures/posplot.png}
+    \caption{\scriptsize Plot of target position := $[{1000}, {-1000}, {-1500}, 50]$}\label{fig:pos}\vspace{20pt}
   \end{subfigure} 
-  \begin{subfigure}[b]{.45\textwidth}
-    \includegraphics[width=.5\textwidth]{figures/velplot.png}
-    \caption{Plot of velocity = bla bla bla.}    \label{fig:ve}
+  \begin{subfigure}[b]{.9\textwidth}
+    \centering
+    \includegraphics[width=.9\textwidth]{figures/velplot.png}
+    \caption{\scriptsize Plot of target velocity := $[280, {-10}, {-280}, {-20}, {-100}, 100, {-50}]$. The spikes are believed to be caused by speed difference between microcontroller execution (1 kHz) and maximum encoder speed (235 ticks/second). There is no visible change in output however, and the spikes only last 2-3 ms.}    \label{fig:vel}
   \end{subfigure}
-  \captionof{figure}[Plots of controller behaviour]{Plots of controller behaviour for some target values. Asymptote lines added for clarity.}
+  \captionof{figure}[Plots of controller behaviour]{Plots of controller behaviour for some target values.}
 \end{figure}
 \subsection{Results}
 A PID controller controlling the angle and angular speed of a DC motor with tick-counter was created. It was implemented using an \emph{Arduino Due} along with ROS. Both angle and velocity control show the expected behaviour, including a minimum jerk motion for the angle control.\par
-The angle control is carried out in the optimal time of the minimum jerk equation. For bigger angles to traverse, this timeframe is relatively long. By replacing the minimum jerk equation with other models which also lower the motor jerk but remaining at maximum speed for longer times (i.e. spline interpolation), the efficiency could be vastly increased on this part.
+LThe angle control is carried out in the optimal time of the minimum jerk equation. For bigger angles to traverse, this timeframe is relatively long. By replacing the minimum jerk equation with other models which also lower the motor jerk but remaining at maximum speed for longer times (i.e. spline interpolation), the efficiency could be vastly increased on this part.
 
 \begin{thebibliography}{99}
-\bibitem{datasheet_motor_1} RH158 micro motor \url{http://www.reductor-motor.com/eng-micRH158.htm} (accessed at 2015--11--22)
-\bibitem{datasheet_motor_2} gear-motors with Hall-effect encoder \url{http://www.reductor-motor.com/eng-mic_e_data1.htm} (accessed at 2015--11--22)
+\bibitem{datasheet_motor_1} RH158 micro motor \url{http://www.reductor-motor.com/eng-micRH158.htm} (accessed at 2015-11-22)
+\bibitem{datasheet_motor_2} gear-motors with Hall-effect encoder \url{http://www.reductor-motor.com/eng-mic_e_data1.htm} (accessed at 2015-11-22)
 \end{thebibliography}
 
 \end{document}

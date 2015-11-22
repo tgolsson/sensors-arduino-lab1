@@ -1,13 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.17)  21 NOV 2015 12:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.17)  22 NOV 2015 20:38
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
-**preamble.tex
+**\input preamble.tex
 (./preamble.tex
-LaTeX2e <2015/01/01>
-Babel <3.9l> and hyphenation patterns for 79 languages loaded.
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:1: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -19,7 +18,7 @@ l.1 \usepackage{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:2: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -31,7 +30,7 @@ l.2 \usepackage{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:3: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -43,7 +42,7 @@ l.3 ...op=1in, bottom=1.1in, left=1in, right=1in]{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:4: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -55,7 +54,7 @@ l.4 \usepackage[utf8]{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:5: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -67,7 +66,7 @@ l.5 \usepackage[T1]{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:6: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -79,7 +78,7 @@ l.6 \usepackage{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:7: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -91,7 +90,7 @@ l.7 \usepackage{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:8: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -103,7 +102,7 @@ l.8 \usepackage{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:9: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -115,7 +114,7 @@ l.9 \usepackage{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:9: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -127,7 +126,7 @@ l.9 \usepackage{siunitx}\usepackage{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:10: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -139,7 +138,7 @@ l.10 \usepackage{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:10: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -151,7 +150,7 @@ l.10 \usepackage{varioref}\usepackage{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:11: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -163,7 +162,7 @@ l.11 \usepackage{
 between \documentclass and \begin{document}.
 
 
-! LaTeX Error: \usepackage before \documentclass.
+./preamble.tex:12: LaTeX Error: \usepackage before \documentclass.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
@@ -174,10 +173,22 @@ l.12 \usepackage{
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
 
-! Undefined control sequence.
+
+./preamble.tex:13: LaTeX Error: \usepackage before \documentclass.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.13 \usepackage{
+                 url}
+\usepackage may only appear in the document preamble, i.e.,
+between \documentclass and \begin{document}.
+
+./preamble.tex:15: Undefined control sequence.
 <argument> \belowcaptionskip 
                              
-l.14 \setlength{\belowcaptionskip}{-6pt}
+l.15 \setlength{\belowcaptionskip}{-6pt}
                                         
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -186,13 +197,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: Missing \begin{document}.
+./preamble.tex:15: LaTeX Error: Missing \begin{document}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.14 \setlength{\belowcaptionskip}{-6pt}
+l.15 \setlength{\belowcaptionskip}{-6pt}
                                         
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -201,8 +212,8 @@ Missing character: There is no - in font nullfont!
 Missing character: There is no 6 in font nullfont!
 Missing character: There is no p in font nullfont!
 Missing character: There is no t in font nullfont!
-! Undefined control sequence.
-l.16 \lst@Key
+./preamble.tex:17: Undefined control sequence.
+l.17 \lst@Key
              {matchrangestart}{f}{\lstKV@SetIf{#1}\lst@ifmatchrangestart}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -226,8 +237,8 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no f in font nullfont!
-! Undefined control sequence.
-l.16 \lst@Key{matchrangestart}{f}{\lstKV@SetIf
+./preamble.tex:17: Undefined control sequence.
+l.17 \lst@Key{matchrangestart}{f}{\lstKV@SetIf
                                               {#1}\lst@ifmatchrangestart}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -235,8 +246,9 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-! You can't use `macro parameter character #' in horizontal mode.
-l.16 \lst@Key{matchrangestart}{f}{\lstKV@SetIf{#
+./preamble.tex:17: You can't use `macro parameter character #' in horizontal mo
+de.
+l.17 \lst@Key{matchrangestart}{f}{\lstKV@SetIf{#
                                                 1}\lst@ifmatchrangestart}
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -244,8 +256,8 @@ If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
 Missing character: There is no 1 in font nullfont!
-! Undefined control sequence.
-l.16 ...{f}{\lstKV@SetIf{#1}\lst@ifmatchrangestart
+./preamble.tex:17: Undefined control sequence.
+l.17 ...{f}{\lstKV@SetIf{#1}\lst@ifmatchrangestart
                                                   }
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -254,12 +266,12 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 14--28
+Overfull \hbox (20.0pt too wide) in paragraph at lines 15--29
 []
  []
 
-! Undefined control sequence.
-l.29 \lstset
+./preamble.tex:30: Undefined control sequence.
+l.30 \lstset
             {
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -268,13 +280,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: Missing \begin{document}.
+./preamble.tex:31: LaTeX Error: Missing \begin{document}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.30   b
+l.31   b
         ackgroundcolor=\color{gray!30},   % choose the background color; you...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -296,8 +308,8 @@ Missing character: There is no l in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no = in font nullfont!
-! Undefined control sequence.
-l.30   backgroundcolor=\color
+./preamble.tex:31: Undefined control sequence.
+l.31   backgroundcolor=\color
                              {gray!30},   % choose the background color; you...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -324,9 +336,9 @@ Missing character: There is no y in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no = in font nullfont!
-! Undefined control sequence.
-l.31   basicstyle=\footnotesize
-                               ,        % the size of the fonts that are use...
+./preamble.tex:32: Undefined control sequence.
+l.32   basicstyle=\scriptsize
+                             ,        % the size of the fonts that are used ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -466,8 +478,8 @@ Missing character: There is no y in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no = in font nullfont!
-! Undefined control sequence.
-l.39   keywordstyle=\color
+./preamble.tex:40: Undefined control sequence.
+l.40   keywordstyle=\color
                           {blue},       % keyword style
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -533,8 +545,8 @@ Missing character: There is no y in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no = in font nullfont!
-! Undefined control sequence.
-l.43   numberstyle=\tiny
+./preamble.tex:44: Undefined control sequence.
+l.44   numberstyle=\tiny
                         \color{gray}, % the style that is used for the line-...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -542,8 +554,8 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-! Undefined control sequence.
-l.43   numberstyle=\tiny\color
+./preamble.tex:44: Undefined control sequence.
+l.44   numberstyle=\tiny\color
                               {gray}, % the style that is used for the line-...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -566,8 +578,8 @@ Missing character: There is no l in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no = in font nullfont!
-! Undefined control sequence.
-l.44   rulecolor=\color
+./preamble.tex:45: Undefined control sequence.
+l.45   rulecolor=\color
                        {blue!20},
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -709,12 +721,12 @@ Missing character: There is no 1 in font nullfont!
 Missing character: There is no p in font nullfont!
 Missing character: There is no t in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 30--54
+Overfull \hbox (20.0pt too wide) in paragraph at lines 31--55
 []
  []
 
-! Undefined control sequence.
-l.57 \DeclareCaptionFormat
+./preamble.tex:58: Undefined control sequence.
+l.58 \DeclareCaptionFormat
                           {myformat}{%
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -723,13 +735,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: Missing \begin{document}.
+./preamble.tex:58: LaTeX Error: Missing \begin{document}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.57 \DeclareCaptionFormat{m
+l.58 \DeclareCaptionFormat{m
                             yformat}{%
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -742,8 +754,8 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no m in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no t in font nullfont!
-! Undefined control sequence.
-l.58   \hspace{1pt}\fcolorbox
+./preamble.tex:59: Undefined control sequence.
+l.59   \hspace{1pt}\fcolorbox
                              {blue!20}{gray!20}{\footnotesize\parbox{\dimexp...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -765,8 +777,8 @@ Missing character: There is no y in font nullfont!
 Missing character: There is no ! in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no 0 in font nullfont!
-! Undefined control sequence.
-l.58 ...\fcolorbox{blue!20}{gray!20}{\footnotesize
+./preamble.tex:59: Undefined control sequence.
+l.59 ...\fcolorbox{blue!20}{gray!20}{\footnotesize
                                                   \parbox{\dimexpr\textwidth...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -774,31 +786,11 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-! Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.58 ...idth-17pt\fboxrule\relax}{#1#2\ttfamily#3}
-                                                  }\vspace{-4pt}
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-! Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.58 ...idth-17pt\fboxrule\relax}{#1#2\ttfamily#3}
-                                                  }\vspace{-4pt}
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-! You can't use `macro parameter character #' in internal vertical mode.
+./preamble.tex:59: You can't use `macro parameter character #' in internal vert
+ical mode.
 <argument> \hsize \@tempdima \@parboxrestore ##
                                                1##2\ttfamily ##3\@@par 
-l.58 ...idth-17pt\fboxrule\relax}{#1#2\ttfamily#3}
+l.59 ...xpr\textwidth-17pt\relax}{#1#2\ttfamily#3}
                                                   }\vspace{-4pt}
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -806,10 +798,11 @@ If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
 Missing character: There is no 1 in font nullfont!
-! You can't use `macro parameter character #' in horizontal mode.
+./preamble.tex:59: You can't use `macro parameter character #' in horizontal mo
+de.
 <argument> \hsize \@tempdima \@parboxrestore ##1##
                                                   2\ttfamily ##3\@@par 
-l.58 ...idth-17pt\fboxrule\relax}{#1#2\ttfamily#3}
+l.59 ...xpr\textwidth-17pt\relax}{#1#2\ttfamily#3}
                                                   }\vspace{-4pt}
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -817,10 +810,11 @@ If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
 Missing character: There is no 2 in font nullfont!
-! You can't use `macro parameter character #' in horizontal mode.
+./preamble.tex:59: You can't use `macro parameter character #' in horizontal mo
+de.
 <argument> ...a \@parboxrestore ##1##2\ttfamily ##
                                                   3\@@par 
-l.58 ...idth-17pt\fboxrule\relax}{#1#2\ttfamily#3}
+l.59 ...xpr\textwidth-17pt\relax}{#1#2\ttfamily#3}
                                                   }\vspace{-4pt}
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -828,11 +822,11 @@ If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 58.
+(Font)              <7> on input line 59.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 58.
-! Undefined control sequence.
-l.60 \captionsetup
+(Font)              <5> on input line 59.
+./preamble.tex:61: Undefined control sequence.
+l.61 \captionsetup
                   [lstlisting]{format=myformat}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -868,17 +862,17 @@ Missing character: There is no m in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no t in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 57--61
+Overfull \hbox (20.0pt too wide) in paragraph at lines 58--62
 []
  []
 
 
-Overfull \hbox (8174.99998pt too wide) in paragraph at lines 57--61
+Overfull \hbox (8174.99998pt too wide) in paragraph at lines 58--62
 []$
  []
 
-! Undefined control sequence.
-l.62 \captionsetup
+./preamble.tex:63: Undefined control sequence.
+l.63 \captionsetup
                   [figure]{labelfont=sf,hypcap=false,format=hang,margin=0.5c...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -887,13 +881,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: Missing \begin{document}.
+./preamble.tex:63: LaTeX Error: Missing \begin{document}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.62 \captionsetup[
+l.63 \captionsetup[
                    figure]{labelfont=sf,hypcap=false,format=hang,margin=0.5c...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -997,10 +991,10 @@ Missing character: There is no = in font nullfont!
 Missing character: There is no 0 in font nullfont!
 Missing character: There is no . in font nullfont!
 Missing character: There is no 7 in font nullfont!
-! Illegal unit of measure (pt inserted).
+./preamble.tex:63: Illegal unit of measure (pt inserted).
 <to be read again> 
                    f
-l.62 ...tion=RaggedRight,calcwidth=0.7\linewidth,f
+l.63 ...tion=RaggedRight,calcwidth=0.7\linewidth,f
                                                   ont=footnotesize,justifica...
 Dimensions can be in units of em, ex, in, pt, pc,
 cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
@@ -1050,8 +1044,171 @@ Missing character: There is no f in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no d in font nullfont!
-! Undefined control sequence.
-l.63 \captionsetup
+./preamble.tex:64: Undefined control sequence.
+l.64 \captionsetup
+                  [subfigure]{labelfont=sf,hypcap=false,format=hang,margin=0...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no [ in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no ] in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no 5 in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no j in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no R in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no R in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no 7 in font nullfont!
+./preamble.tex:64: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   f
+l.64 ...tion=RaggedRight,calcwidth=0.7\linewidth,f
+                                                  ont=footnotesize,justifica...
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+Missing character: There is no f in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no z in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no j in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no j in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+./preamble.tex:65: Undefined control sequence.
+l.65 \captionsetup
                   [table]{labelfont=sf,hypcap=false,format=hang,margin=1cm,j...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1154,10 +1311,10 @@ Missing character: There is no = in font nullfont!
 Missing character: There is no 0 in font nullfont!
 Missing character: There is no . in font nullfont!
 Missing character: There is no 8 in font nullfont!
-! Illegal unit of measure (pt inserted).
+./preamble.tex:65: Illegal unit of measure (pt inserted).
 <to be read again> 
                    f
-l.63 ...tion=RaggedRight,calcwidth=0.8\linewidth,f
+l.65 ...tion=RaggedRight,calcwidth=0.8\linewidth,f
                                                   ont=footnotesize,justifica...
 Dimensions can be in units of em, ex, in, pt, pc,
 cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
@@ -1207,8 +1364,8 @@ Missing character: There is no f in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no d in font nullfont!
-! Undefined control sequence.
-l.64 \labelformat
+./preamble.tex:66: Undefined control sequence.
+l.66 \labelformat
                  {equation}{(#1)}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1225,8 +1382,9 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no ( in font nullfont!
-! You can't use `macro parameter character #' in horizontal mode.
-l.64 \labelformat{equation}{(#
+./preamble.tex:66: You can't use `macro parameter character #' in horizontal mo
+de.
+l.66 \labelformat{equation}{(#
                               1)}
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -1236,14 +1394,14 @@ return to the right one by typing `I}' or `I$' or `I\par'.
 Missing character: There is no 1 in font nullfont!
 Missing character: There is no ) in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 62--65
+Overfull \hbox (20.0pt too wide) in paragraph at lines 63--67
 []
  []
 
 )
 ! Emergency stop.
-<*> preamble.tex
-                
+<*> \input preamble.tex
+                       
 *** (job aborted, no legal \end found)
 
  
@@ -1254,5 +1412,5 @@ Here is how much of TeX's memory you used:
  3607 multiletter control sequences out of 15000+600000
  3808 words of font info for 15 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 19i,3n,17p,180b,110s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 19i,3n,17p,190b,110s stack positions out of 5000i,500n,10000p,200000b,80000s
 !  ==> Fatal error occurred, no output PDF file produced!
