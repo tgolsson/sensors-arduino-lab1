@@ -44,14 +44,14 @@ The minimum jerk equation is an important part of creating smooth control. When 
   \begin{align}
     x(t) &= \di{x}{i} +  (\di{x}{f} - \di{x}{i}) \cdot \left[10\left(\frac{t}{T}\right)^3 - 15\left(\frac{t}{T}\right)^4 + 6\left(\frac{t}{T}\right)^6 \right]\label{eq:mje}          
   \end{align}}
-
 The $T$ parameter has to be estimated. If $T$ is much larger than  the actual time that is needed for the trajectory, the velocity will be very low, and if $T$ is too low $x(t)$ will approach infinity unless $\frac{t}{T}$ is clamped to $[0,1]$. However, this solution is not optimal. Instead, we choose to calculate the optimal time $\di{T}{opt}$ as follows.%, and this can be seen in \ref{eq:derivative}.
 \par
 For finding out the optimal time $\di{T}{opt}$, we substitute:
-\begin{align}
+\begin{equation}
   \label{eq:tau_substitution}
   \tau:=\frac{t}{T}
-\end{align}
+\end{equation}
+\vspace{-6mm}
 \begin{align}
 \ref{eq:mje}\Rightarrow x(\tau)&= \di{x}{i} +  (\di{x}{f} - \di{x}{i}) \cdot \left(10\tau^3 - 15\tau^4 + 6\tau^6 \right)\\
 \od{x(\tau)}{\tau}&= (\di{x}{f} - \di{x}{i})\cdot(30\tau^2-60\tau^3+36\tau^5)\label{eq:dx_dtau}
@@ -62,10 +62,15 @@ For finding out the optimal time $\di{T}{opt}$, we substitute:
 \end{align}
 In order to make this term dependent on $T$, we must resubstitute:
 \begin{align}
-  \ref{eq:tau_substitution}\Rightarrow \od{\tau}{t}&=\frac{1}{T}\\
-  \Rightarrow\dif\tau&=\dif t\cdot\frac{1}{T}\label{eq:dtau_resubs}\\
-  \ref{eq:dx_dtau},\ref{eq:dtau_resubs}\Rightarrow\eval{T\cdot\od{x(\tau)}{t}}_{\tau=0.5}&=\frac{15}{18}\cdot(\di{x}{f} - \di{x}{i})\\
-  \Rightarrow\eval{\od{x(\tau)}{t}}_{\tau=0.5}&=\frac{15}{18}\cdot\frac{\di{x}{f} - \di{x}{i}}{T}\label{eq:dx_dt}
+  \ref{eq:tau_substitution}&\Rightarrow %\od{\tau}{t}
+\dot{\tau}
+=\frac{1}{T}\\
+  &\Rightarrow\dif\tau=\dif t\cdot\frac{1}{T}\label{eq:dtau_resubs}\\
+  \ref{eq:dx_dtau},\ref{eq:dtau_resubs}&\Rightarrow%\eval{T\cdot\od{x(\tau)}{t}}_{\tau=0.5}=\frac{15}{18}\cdot(\di{x}{f} - \di{x}{i})\\
+%  &\Rightarrow
+\eval{\od{x(\tau)}{t}}
+%\dot{\tau}}
+_{\tau=0.5}=\frac{15}{18}\cdot\frac{\di{x}{f} - \di{x}{i}}{T}\label{eq:dx_dt}
 \end{align}
 Now, if we state an optimal maximum velocity $\di{v}{opt}$ for the minimum jerk equation, we can calculate the optimal time $\di{T}{opt}$ for this velocity:
 \begin{align}
