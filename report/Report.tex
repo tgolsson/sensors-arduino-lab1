@@ -51,7 +51,7 @@ For finding out the optimal time $\di{T}{opt}$, we substitute:
 \begin{align}
   \label{eq:tau_substitution}
   \tau:=\frac{t}{T}
-\end{align}
+\end{align}\vspace{-26pt}
 \begin{align}
 \ref{eq:mje}\Rightarrow x(\tau)&= \di{x}{i} +  (\di{x}{f} - \di{x}{i}) \cdot \left(10\tau^3 - 15\tau^4 + 6\tau^6 \right)\\
 \od{x(\tau)}{\tau}&= (\di{x}{f} - \di{x}{i})\cdot(30\tau^2-60\tau^3+36\tau^5)\label{eq:dx_dtau}
@@ -62,10 +62,15 @@ For finding out the optimal time $\di{T}{opt}$, we substitute:
 \end{align}
 In order to make this term dependent on $T$, we must resubstitute:
 \begin{align}
-  \ref{eq:tau_substitution}\Rightarrow \od{\tau}{t}&=\frac{1}{T}\\
-  \Rightarrow\dif\tau&=\dif t\cdot\frac{1}{T}\label{eq:dtau_resubs}\\
-  \ref{eq:dx_dtau},\ref{eq:dtau_resubs}\Rightarrow\eval{T\cdot\od{x(\tau)}{t}}_{\tau=0.5}&=\frac{15}{18}\cdot(\di{x}{f} - \di{x}{i})\\
-  \Rightarrow\eval{\od{x(\tau)}{t}}_{\tau=0.5}&=\frac{15}{18}\cdot\frac{\di{x}{f} - \di{x}{i}}{T}\label{eq:dx_dt}
+  \ref{eq:tau_substitution}&\Rightarrow %\od{\tau}{t}
+\dot{\tau}
+=\frac{1}{T}\\
+  &\Rightarrow\dif\tau=\dif t\cdot\frac{1}{T}\label{eq:dtau_resubs}\\
+  \ref{eq:dx_dtau},\ref{eq:dtau_resubs}&\Rightarrow%\eval{T\cdot\od{x(\tau)}{t}}_{\tau=0.5}=\frac{15}{18}\cdot(\di{x}{f} - \di{x}{i})\\
+%  &\Rightarrow
+\eval{\od{x(\tau)}{t}}
+%\dot{\tau}}
+_{\tau=0.5}=\frac{15}{18}\cdot\frac{\di{x}{f} - \di{x}{i}}{T}\label{eq:dx_dt}
 \end{align}
 Now, if we state an optimal maximum velocity $\di{v}{opt}$ for the minimum jerk equation, we can calculate the optimal time $\di{T}{opt}$ for this velocity:
 \begin{align}
