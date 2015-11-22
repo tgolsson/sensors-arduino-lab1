@@ -13,5 +13,17 @@
     "art11")
    (LaTeX-add-labels
     "eq:pid"
-    "eq:mje")))
+    "sec:mje"
+    "eq:mje"
+    "eq:tau_substitution"
+    "eq:dx_dtau"
+    "eq:dtau_resubs"
+    "eq:dx_dt"
+    "eq:t_opt"
+    "tab:measurements"
+    "fig:pos"
+    "fig:ve")
+   (LaTeX-add-bibitems
+    "datasheet_motor_1"
+    "datasheet_motor_2")))
 

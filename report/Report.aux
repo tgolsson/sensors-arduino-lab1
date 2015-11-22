@@ -1,11 +1,73 @@
 \relax 
-\@writefile{toc}{\contentsline {section}{\numberline {1}Implementation of a PID controller}{1}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Theory and motivation}{1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}PID controller}{1}}
 \newlabel{1@xvr}{{}{1}}
 \newlabel{1@vr}{{}{1}}
 \newlabel{eq:pid}{{(1)}{1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Minimum jerk}{1}}
-\newlabel{2@xvr}{{}{1}}
-\newlabel{2@vr}{{}{1}}
-\newlabel{eq:mje}{{(2)}{1}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Position controller}{2}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Velocity controller}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Minimum jerk}{2}}
+\newlabel{sec:mje}{{1.2}{2}}
+\newlabel{2@xvr}{{}{2}}
+\newlabel{2@vr}{{}{2}}
+\newlabel{eq:mje}{{(2)}{2}}
+\newlabel{eq:tau_substitution}{{(3)}{2}}
+\newlabel{eq:dx_dtau}{{(5)}{2}}
+\newlabel{eq:dtau_resubs}{{(8)}{2}}
+\newlabel{eq:dx_dt}{{(9)}{2}}
+\newlabel{eq:t_opt}{{(11)}{2}}
+\citation{datasheet_motor_1}
+\citation{datasheet_motor_2}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Implementation}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Hardware and environment}{3}}
+\@writefile{toc}{\contentsline {paragraph}{Measurements}{3}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Ticks per rotation and maximum ticks per second values\relax }}{3}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:measurements}{{1}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Position controller}{3}}
+\newlabel{3@xvr}{{}{3}}
+\newlabel{3@vr}{{}{3}}
+\newlabel{4@xvr}{{}{3}}
+\newlabel{4@vr}{{}{3}}
+\newlabel{lst:position-callback}{{1}{3}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Set Position Callback}{3}}
+\newlabel{5@xvr}{{}{4}}
+\newlabel{5@vr}{{}{4}}
+\newlabel{lst:position-controller}{{2}{4}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}Position Controller}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Velocity controller}{4}}
+\newlabel{6@xvr}{{}{4}}
+\newlabel{6@vr}{{}{4}}
+\newlabel{lst:velocity-callback}{{3}{5}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}Set Velocity Callback}{5}}
+\newlabel{7@xvr}{{}{5}}
+\newlabel{7@vr}{{}{5}}
+\newlabel{lst:velocity-controller}{{4}{5}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}Velocity Controller}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}PID-controller, minimum jerk and actuation}{5}}
+\newlabel{8@xvr}{{}{5}}
+\newlabel{8@vr}{{}{5}}
+\newlabel{9@xvr}{{}{5}}
+\newlabel{9@vr}{{}{5}}
+\newlabel{lst:pid}{{5}{5}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}PID-implementation}{5}}
+\newlabel{10@xvr}{{}{6}}
+\newlabel{10@vr}{{}{6}}
+\newlabel{11@xvr}{{}{6}}
+\newlabel{11@vr}{{}{6}}
+\newlabel{lst:mje}{{6}{6}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}Mimimum jerk implementation}{6}}
+\newlabel{12@xvr}{{}{6}}
+\newlabel{12@vr}{{}{6}}
+\newlabel{lst:actuate}{{7}{6}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}Actuator implementation}{6}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Verification and results}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}PID-tuning}{6}}
+\bibcite{datasheet_motor_1}{1}
+\bibcite{datasheet_motor_2}{2}
+\newlabel{13@xvr}{{}{7}}
+\newlabel{13@vr}{{}{7}}
+\newlabel{fig:pos}{{1a}{7}}
+\newlabel{sub@fig:pos}{{a}{7}}
+\newlabel{fig:ve}{{1b}{7}}
+\newlabel{sub@fig:ve}{{b}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Plots of controller behaviour}}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Results}{7}}
