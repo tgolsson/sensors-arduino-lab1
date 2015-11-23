@@ -1,6 +1,6 @@
 \documentclass[11pt]{article}
 \include{preamble} %% Separate file for preamble with macros and stuff
-
+\renewcommand{\lstlistlistingname}{Code listings}
 
 %% Title
 \title{Laboration 1: PID-controls\\ {\small Sensors and Sensing}}
@@ -9,8 +9,12 @@
 
 \begin{document}
 \maketitle %Title area
-\listoffigures % List of all figures
+\begin{center}
+  \emph{All code for this exercise can be found at \\ \url{https://github.com/tgolsson/sensors-arduino-lab1}}
+\end{center}
 \lstlistoflistings % List of all code snippets
+\listoffigures % List of all figures
+\listoftables
 \lstset{ matchrangestart=t} %initialise the linerange-macro for \lstinput...
 \section{Theory and motivation}
 Control algorithms are important to create predictable, safe, and reliable operation in robotics applications. Two important algorithms/controllers for this purpose is the \emph{PID-controller} and the \emph{mimimum jerk trajectory}. 
