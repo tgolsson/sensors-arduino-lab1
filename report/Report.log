@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.17)  23 NOV 2015 10:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.17)  23 NOV 2015 12:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1048,11 +1048,6 @@ File: figures/velplot.png Graphic file (type png)
 Package pdftex.def Info: figures/velplot.png used on input line 154.
 (pdftex.def)             Requested size: 366.899pt x 172.42883pt.
  [7 <./figures/posplot.png> <./figures/velplot.png>]
-Underfull \hbox (badness 4713) in paragraph at lines 165--166
-[]\T1/cmr/m/n/10.95 gear-motors with Hall-effect en-coder $\T1/cmtt/m/n/10.95 h
-ttp : / / www . reductor-[]motor . com / eng-[]mic _ e _
- []
-
 [8] (./Report.aux) ) 
 Here is how much of TeX's memory you used:
  16030 strings out of 493089
@@ -1089,7 +1084,7 @@ r/sfss0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti0800.pfb>
 mf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texmf-dist/fonts/t
 ype1/public/cm-super/sftt0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-
 super/sftt1095.pfb>
-Output written on Report.pdf (8 pages, 531669 bytes).
+Output written on Report.pdf (8 pages, 532568 bytes).
 PDF statistics:
  162 PDF objects out of 1000 (max. 8388607)
  115 compressed objects within 2 object streams

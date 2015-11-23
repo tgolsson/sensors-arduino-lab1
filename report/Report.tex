@@ -20,7 +20,7 @@
 Control algorithms are important to create predictable, safe, and reliable operation in robotics applications. Two important algorithms/controllers for this purpose is the \emph{PID-controller} and the \emph{mimimum jerk trajectory}. 
 
 \subsection{PID controller}
-PID in the name PID-controller is short for \emph{Proportional}-\emph{Integral}-\emph{Derivative}-controller. As this implies, the controlling signal is based on a proportion of the current error, the previous error, and the rate of change of the observed error. The mathemathical formulation of this can be seen in \vref{eq:pid}.\par \vspace{10pt}
+PID in the name PID-controller is short for \emph{Proportional}-\emph{Integral}-\emph{Derivative}-controller. As this implies, the controlling signal is based on a proportion of the current error, the previous error, and the rate of change of the observed error. The mathemathical formulation of this is shown in \vref{eq:pid}.\par \vspace{10pt}
 {\footnotesize
   \begin{tabular}{l l l}
     \textbf{Let:} \\
@@ -48,9 +48,9 @@ The minimum jerk equation is an important part of creating smooth control. When 
   \end{tabular}
   \begin{align}
     x(t) &= \di{x}{i} +  (\di{x}{f} - \di{x}{i}) \cdot \left[10\left(\frac{t}{T}\right)^3 - 15\left(\frac{t}{T}\right)^4 + 6\left(\frac{t}{T}\right)^6 \right]\label{eq:mje}          
-  \end{align}}
-The $T$ parameter has to be estimated. If $T$ is much larger than  the actual time that is needed for the trajectory, the velocity will be very low, and if $T$ is too low $x(t)$ will approach infinity unless $\frac{t}{T}$ is clamped to $[0,1]$. However, this solution is not optimal. Instead, we choose to calculate the optimal time $\di{T}{opt}$ as follows.%, and this can be seen in \ref{eq:derivative}.
+  \end{align}}%
 \par
+The $T$ parameter has to be estimated. If $T$ is much larger than  the actual time that is needed for the trajectory, the velocity will be very low, and if $T$ is too low $x(t)$ will approach infinity unless $\frac{t}{T}$ is clamped to $[0,1]$. However, this solution is not optimal. Instead, we choose to calculate the optimal time $\di{T}{opt}$ as follows. \par \vspace{2pt}
 For finding out the optimal time $\di{T}{opt}$, we substitute:
 {
   \footnotesize
@@ -85,39 +85,39 @@ The laboration is performed using an \emph{Arduino Due} microcontroller, with th
 
 The motor used is the \emph{Micro Motors RHE158 75:1 12V DC}, connected to the motor shield. As the USB-bus cannot supply enough power to drive the motor, an external 12V power adapter was used.
 \paragraph{Measurements}
-In order to ensure correct behaviour, the amount of tics per revolution as well as the maximum velocity of the motor was measured and compared to the datasheet \cite{datasheet_motor_1},\cite{datasheet_motor_2}. \par
+In order to ensure correct behaviour, the amount of steps per revolution as well as the maximum velocity of the motor was measured and compared to the datasheet \cite{datasheet_motor_1},\cite{datasheet_motor_2}. \par
 \begin{table}[!htbp]
   \centering
   \caption{Measured and expected motor characteristics}
   \begin{tabular}{l|cc}
     Characteristic & Datasheet & Measured \\ \hline
-    Ticks/rotation & 230.5 &235.0\\ 
-    Ticks/second & 311.0 & 280.0\\
+    Steps/rotation & 230.5 &235.0\\ 
+    Steps/second & 311.0 & 280.0\\
     Rotations/second & 1.35 & 1.19
   \end{tabular}
   \label{tab:measurements}
 \end{table}
-The maximum speed in the data sheet refers to the motor speed without load. Since there was load present at the laboratory outset, the measured value of ticks per second was used. The ticks per rotation value was measured turning a varying amount of ticks and seeing when one rotation was completed. This method is expected to be relatively uncertain, since there is a large possible error margin without proper measuring equipment. In order to improve the measurement, 10 rotations were made, and the result was verified twice. \par
+The maximum speed in the data sheet refers to the motor speed without load. Since there was load present at the laboratory outset, the measured value of steps per second was used. The steps per rotation value was measured turning a varying amount of steps and seeing when one rotation was completed. This method is expected to be relatively uncertain, since there is a large possible error margin without proper measuring equipment. In order to improve the measurement, 10 rotations were made, and the result was verified twice. \par
 
-The ticks per second value for maximum speed was measured by applying a duty cycle of 100\% to the PWM and programatically measuring the ticks. Ten measurements were made for 10 seconds each, and the average ticks per second was chosen as the speed value. This measurement is considered very exact and is used in the rest of this paper. 
+The steps per second value for maximum speed was measured by applying a duty cycle of 100\% to the PWM and programatically measuring the steps. Ten measurements were made for 10 seconds each, and the average steps per second was chosen as the speed value. This measurement is considered very exact and is used in the rest of this paper. 
 
 \subsection{Position controller}
 The first part of the position is the callback for setting a target position. This code is shown in listing \vref{lst:position-callback}. The code updates the mode of operation, and sets the start and end position for the movement. The integral term of the controller is also set to zero. Tests were made without setting it to zero, but this caused unreliable behaviour in some situations, such as when the target position was moved closer to the current position. \par
 
-As can be seen on line 319, \ref{eq:t_opt} from subsection \vref{sec:mje} is used to calculate the end time point. This ensures that we  reach the maximum speed at $\frac{t}{T} = 0.5$. While this is suboptimal for long trajectories, it makes sure that $T$ is realistic for shorter paths. If long trajectories will be the normal mode of operation; an approach with splines should be used instead of the minimun jerk equation. \par
+As can be seen on line 319, \ref{eq:t_opt} from subsection \vref{sec:mje} is used to calculate the end time point. This ensures that we  reach the maximum speed at $\frac{t}{T} = 0.5$. While this is suboptimal for long trajectories, it makes sure that $T$ is realistic for shorter paths. If long trajectories will be the normal mode of operation; an approach with spline interpolation should be used instead of the minimun jerk equation. \par
 \newpage
 \lstinputlisting[label=lst:position-callback,caption={Set Position Callback}, linerange={307-324 }]{../lab1_stub/lab1_stub.ino}
 
-The position controller is implemented to setup the parameters for PID and MJE. The code for this can be see in listing \vref{lst:position-controller}. The minimum jerk function is called with start-time, current time, and end-time, as well as start and end position. The output of this equation is then used to calculate the momentary error, as well as its derivative. These are then given to the PID-controller. \par
+The position controller is implemented to setup the parameters for PID and MJE. The code for this is shown in listing \vref{lst:position-controller}. The minimum jerk function is called with start-time, current time, and end-time, as well as start and end position. The output of this equation is then used to calculate the momentary error, as well as its derivative. These are then given to the PID-controller. \par
 
 \lstinputlisting[label=lst:position-controller,caption={Position Controller},linerange={221-249}]{../lab1_stub/lab1_stub.ino}
 
 \subsection{Velocity controller}
-As with the position controller, an important part of the velocity controller is the callback for setting the target velocity. This code is shown in listing \vref{lst:velocity-callback}. The only difference to the position callback is the $T$ parameter. This was tested to see the minimum acceptable time to go from full forward speed to full reverse speed, and 3 seconds seemed to be a reasonable value. As the difference in speed is 560 ticks per second; this therefore becomes $\left\lceil\frac{3}{560}\right\rceil _4 = 0.006$. \par
+As with the position controller, an important part of the velocity controller is the callback for setting the target velocity. This code is shown in listing \vref{lst:velocity-callback}. The only difference to the position callback is the $T$ parameter. This was tested to see the minimum acceptable time to go from full forward speed to full reverse speed, and 3 seconds seemed to be a reasonable value. As the difference in speed is 560 steps per second; this therefore becomes $\left\lceil\frac{3}{560}\right\rceil _4 = 0.006$. \par
 
 \lstinputlisting[label=lst:velocity-callback,caption={Set Velocity Callback},linerange={333-351}]{../lab1_stub/lab1_stub.ino}
 
-The velocity controller is also very similar to the position controller, as can be seen in listing \vref{lst:velocity-controller}. As before, the minimum jerk function is called with start-time, current time, and end-time. However, the last two parameters are replaced by  start and end velocity. As can be seen on line 254-255 the momentary velocity is smoothed using a sliding sum, and normalized to seconds. The reason for this is that the maximum speed of the motor is 235 ticks per second, while the program operates at 1 kHz. The general rule therefore is that no encoder ticks will happen during one program cycle, therefore causing the momentary speed to be measured as 0. After this, the velocity controller continues as the position controller
+The velocity controller is also very similar to the position controller, as shown in listing \vref{lst:velocity-controller}. As before, the minimum jerk function is called with start-time, current time, and end-time. However, the last two parameters are replaced by  start and end velocity. As can be seen on line 254-255 the momentary velocity is smoothed using a sliding sum, and normalized to seconds. The reason for this is that the maximum speed of the motor is 280 steps per second, while the program operates at 1 kHz. The general rule therefore is that no encoder steps will happen during one program cycle, therefore causing the momentary speed to be measured as 0. After this, the velocity controller continues as the position controller
 
 
 \lstinputlisting[label=lst:velocity-controller,caption={Velocity Controller},linerange={252-273}]{../lab1_stub/lab1_stub.ino}
@@ -127,20 +127,20 @@ The PID-controller used before matches the equation shown earlier in \vref{eq:pi
 
 \lstinputlisting[label=lst:pid,caption={PID-implementation},linerange={285-294}]{../lab1_stub/lab1_stub.ino}
 
-The mimimum jerk equation is also implemented as shown earlier  in \vref{eq:mje}. The only difference is that the fraction $\frac{t}{T}$ is clamped to $[0,1]$. Though this should not be needed with the guarantees made by the calculations of $T$, it was put in as a safeguard. Otherwise, a delayed controller can potentially accumulate an infinite error can lose control. The code for this can be seen in listing \vref{lst:mje}.\par
+The mimimum jerk equation is also implemented as shown earlier  in \vref{eq:mje}. The only difference is that the fraction $\frac{t}{T}$ is clamped to $[0,1]$. Though this should not be needed with the guarantees made by the calculations of $T$, it was put in as a safeguard. Otherwise, a delayed controller can cause the setpoint to grow to infinity, which in turn causes the error and PID values to grow to infinity. The code for this is shown in listing \vref{lst:mje}.\par
 
 \lstinputlisting[label=lst:mje,caption={Mimimum jerk implementation},linerange={277-283}]{../lab1_stub/lab1_stub.ino}
 
-Lastly, the actuation function is what actually transforms the control value into a PWM output. The function receives the output from the PID-controller, and clamps it to the allowed range as well as setting the direction of the motor. The code for this can be seen in listing \vref{lst:actuate}.
+Lastly, the actuation function is what actually transforms the control value into a PWM output. The function receives the output from the PID-controller, and clamps it to the allowed range as well as setting the direction of the motor. The code for this is shown in listing \vref{lst:actuate}.
 
 \lstinputlisting[label=lst:actuate,caption={Actuator implementation},linerange={208-219}]{../lab1_stub/lab1_stub.ino}
 
 
 \section{Verification and results}
 \subsection{PID-tuning}
-The tuning of the PID-controller was done in three steps. First, the $k_p$ term was found with which reasonable behaviour was seen. Then, the $k_i$ term was estimated to be on the order of $\num{1e-6}$, based on $dT=1000$. This follows from the definition of the integral. When a good value was found, the derivative term was increased and was estimated to be on the order of magnitude $\num{1e0}$. This follows from the definition of the derivative term and the timestep. Lastly, several tests were ran with the final configuration to make sure that no erroneous behaviour was occuring. \par
+The tuning of the PID-controller was done in three steps. First, the $k_p$ term was found with which reasonable behaviour was seen. Then, the $k_i$ term was estimated to be on the order of $\num{1e-6}$, based on $\dif T=1000$. This follows from the definition of the integral. When a good value was found, the derivative term was increased and was estimated to be on the order of magnitude $\num{1e0}$. This follows from the definition of the derivative term and the timestep. Lastly, several tests were ran with the final configuration to make sure that no erroneous behaviour was occuring. \par
 
-After testing, the values $k_p = 60$, $k_i = \num{1e-6}$, and $k_d = 2$ was found to provide the best performance. These parameters were found to provide good results for both velocity and position control. Plots of the behaviours can be seen in figs. \ref{fig:pos} and \vref{fig:vel}. \par
+After testing, the values $\di{K}{p} = 60$, $\di{K}{i} = \num{1e-6}$, and $\di{K}{d}= 2$ was found to provide the best performance. These parameters were found to provide good results for both velocity and position control. Plots of the behaviours are shown in figs. \ref{fig:pos} and \vref{fig:vel}. \par
 
 \begin{figure}[h]
   \centering
@@ -152,17 +152,17 @@ After testing, the values $k_p = 60$, $k_i = \num{1e-6}$, and $k_d = 2$ was foun
   \begin{subfigure}[b]{.9\textwidth}
     \centering
     \includegraphics[width=.9\textwidth]{figures/velplot.png}
-    \caption{\scriptsize Plot of target velocity := $[280, {-10}, {-280}, {-20}, {-100}, 100, {-50}]$. The spikes are believed to be caused by speed difference between microcontroller execution (1 kHz) and maximum encoder speed (235 ticks/second). There is no visible change in output however, and the spikes only last 2-3 ms.}    \label{fig:vel}
+    \caption{\scriptsize Plot of target velocity := $[280, {-10}, {-280}, {-20}, {-100}, 100, {-50}]$. The spikes are believed to be caused by speed difference between microcontroller execution (1 kHz) and maximum encoder speed (235 steps/second). There is no visible change in output however, and the spikes only last 2-3 ms.}    \label{fig:vel}
   \end{subfigure}
   \captionof{figure}[Plots of controller behaviour]{Plots of controller behaviour for some target values.}
 \end{figure}
 \subsection{Results}
 A PID controller controlling the angle and angular speed of a DC motor with tick-counter was created. It was implemented using an \emph{Arduino Due} along with ROS. Both angle and velocity control show the expected behaviour, including a minimum jerk motion for the angle control.\par
-LThe angle control is carried out in the optimal time of the minimum jerk equation. For bigger angles to traverse, this timeframe is relatively long. By replacing the minimum jerk equation with other models which also lower the motor jerk but remaining at maximum speed for longer times (i.e. spline interpolation), the efficiency could be vastly increased on this part.
+The angle control is carried out in the optimal time of the minimum jerk equation, if optimal means reaching maximum velocity at half time. For bigger angles to traverse, this timeframe is relatively long and could be reduced by spending more time at max velocity. This would require replacing the minimum jerk equation with another model; for example a spline interpolation based on minimum jerk behaviour.
 
 \begin{thebibliography}{99}
-\bibitem{datasheet_motor_1} RH158 micro motor \url{http://www.reductor-motor.com/eng-micRH158.htm} (accessed at 2015-11-22)
-\bibitem{datasheet_motor_2} gear-motors with Hall-effect encoder \url{http://www.reductor-motor.com/eng-mic_e_data1.htm} (accessed at 2015-11-22)
+\bibitem{datasheet_motor_1} {RH158 micro motor}. \emph{Datasheet}. \\ \url{http://www.reductor-motor.com/eng-micRH158.htm}. Last accessed at 2015-11-22.
+\bibitem{datasheet_motor_2} {Gear-motors with Hall-effect encoder}. \emph{Datasheet}. \\ \url{http://www.reductor-motor.com/eng-mic_e_data1.htm}. Last accessed at 2015-11-22.
 \end{thebibliography}
 
 \end{document}
